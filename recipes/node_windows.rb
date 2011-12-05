@@ -11,9 +11,9 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,8 +21,8 @@
 # limitations under the License.
 #
 
-home = node['jenkins']['node']['home']
-url  = node['jenkins']['server']['url']
+home = node[:jenkins][:node][:home]
+url  = node[:jenkins][:server][:url]
 
 jenkins_exe = "#{home}\\jenkins-slave.exe"
 service_name = "jenkinsslave"
@@ -44,7 +44,7 @@ end
 template "#{home}/jenkins-slave.xml" do
   source "jenkins-slave.xml"
   variables(:jenkins_home => home,
-            :jnlp_url => "#{url}/computer/#{node['jenkins']['node']['name']}/slave-agent.jnlp")
+            :jnlp_url => "#{url}/computer/#{node[:jenkins][:node][:name]}/slave-agent.jnlp")
 end
 
 #XXX how-to get this directly from the jenkins server?
@@ -62,15 +62,15 @@ service service_name do
   action :nothing
 end
 
-jenkins_node node['jenkins']['node']['name'] do
-  description  node['jenkins']['node']['description']
-  executors    node['jenkins']['node']['executors']
-  remote_fs    node['jenkins']['node']['home']
-  labels       node['jenkins']['node']['labels']
-  mode         node['jenkins']['node']['mode']
-  launcher     node['jenkins']['node']['launcher']
-  mode         node['jenkins']['node']['mode']
-  availability node['jenkins']['node']['availability']
+jenkins_node node[:jenkins][:node][:name] do
+  description  node[:jenkins][:node][:description]
+  executors    node[:jenkins][:node][:executors]
+  remote_fs    node[:jenkins][:node][:home]
+  labels       node[:jenkins][:node][:labels]
+  mode         node[:jenkins][:node][:mode]
+  launcher     node[:jenkins][:node][:launcher]
+  mode         node[:jenkins][:node][:mode]
+  availability node[:jenkins][:node][:availability]
 end
 
 remote_file "#{home}\\slave.jar" do

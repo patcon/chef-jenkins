@@ -26,7 +26,7 @@ THE SOFTWARE.
   Windows service definition for Jenkins slave
 
   To uninstall, run "jenkins-slave.exe stop" to stop the service, then "jenkins-slave.exe uninstall" to uninstall the service.
-  Both commands don't produce any output if the execution is successful. 
+  Both commands don't produce any output if the execution is successful.
 -->
 <service>
   <id>jenkinsslave</id>
